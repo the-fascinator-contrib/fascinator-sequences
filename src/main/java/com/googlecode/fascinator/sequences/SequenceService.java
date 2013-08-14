@@ -34,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.googlecode.fascinator.api.access.AccessControlException;
+import com.googlecode.fascinator.common.JsonSimple;
 import com.googlecode.fascinator.common.JsonSimpleConfig;
 
 public class SequenceService {
@@ -71,6 +72,11 @@ public class SequenceService {
 	 */
 	public void init() throws IOException, SQLException {
 		JsonSimpleConfig config = new JsonSimpleConfig();
+		init(config);
+	}
+	
+	public void init(JsonSimple config) throws IOException, SQLException {
+		
 		// Find data directory
 		derbyHome = config.getString(null, "database-service", "derbyHome");
 		String oldHome = System.getProperty("derby.system.home");
@@ -321,7 +327,7 @@ public class SequenceService {
 
 		// Build response
 		while (result.next()) {
-			sequenceCount = result.getInt("count");
+			sequenceCount = result.getInt("counter");
 		}
 		close(result);
 		close(sql);
@@ -338,7 +344,7 @@ public class SequenceService {
 
 	private void incrementSequence(String sequenceName, Integer sequenceCount) throws SQLException {
 		PreparedStatement sql = connection().prepareStatement(
-				"UPDATE " + SEQUENCE_TABLE + " SET count = ? WHERE sequence_name = ?)");
+				"UPDATE " + SEQUENCE_TABLE + " SET counter = ? WHERE sequence_name = ?");
 
 		// Prepare and execute
 		sql.setInt(1, sequenceCount);
