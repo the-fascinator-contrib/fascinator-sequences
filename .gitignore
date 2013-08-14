@@ -1,2 +1,6 @@
 *.pyc
 *.class
+/.settings
+/target
+/.project
+/.classpath
