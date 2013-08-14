@@ -30,13 +30,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.googlecode.fascinator.api.access.AccessControlException;
 import com.googlecode.fascinator.common.JsonSimple;
 import com.googlecode.fascinator.common.JsonSimpleConfig;
 
+@Component(value = "sequenceService")
 public class SequenceService {
 
 	/** Logging */
@@ -70,6 +74,7 @@ public class SequenceService {
 	 * @throws SQLException 
 	 * 
 	 */
+	@PostConstruct
 	public void init() throws IOException, SQLException {
 		JsonSimpleConfig config = new JsonSimpleConfig();
 		init(config);
