@@ -3,7 +3,7 @@
 
 	<groupId>com.googlecode.the-fascinator</groupId>
 	<artifactId>fascinator-sequences</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 	<name>Fascinator Sequences</name>
   <parent>
@@ -19,13 +19,13 @@
 		<dependency>
 			<groupId>com.googlecode.the-fascinator</groupId>
 			<artifactId>fascinator-core</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.the-fascinator</groupId>
 			<artifactId>fascinator-common</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -33,7 +33,7 @@
 			<artifactId>fascinator-portal</artifactId>	
 			<type>jar</type>
       		<classifier>classes</classifier>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 	   <dependency>
@@ -84,7 +84,7 @@
      <url>scm:git://github.com/the-fascinator-contrib/fascinator-sequences.git</url>
      <connection>scm:git://github.com/the-fascinator-contrib/fascinator-sequences.git</connection>
      <developerConnection>scm:git:https://github.com/the-fascinator-contrib/fascinator-sequences.git</developerConnection>
-     <tag>HEAD</tag>
+     <tag>fascinator-sequences-0.1</tag>
   </scm>
 	
 </project>
