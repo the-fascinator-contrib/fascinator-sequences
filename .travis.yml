@@ -1,0 +1,19 @@
+sudo: required
+language: java
+services:
+- docker
+before_install:
+- mkdir /tmp/build
+- docker pull qcifengineering/redbox-builder
+- docker run -v /tmp/build:/build -e "CLONEPATH=https://github.com/the-fascinator-contrib/fascinator-sequences.git"
+  qcifengineering/redbox-builder
+install: true
+script: true
+after_success:
+- docker run -v /tmp/build:/build -e "SONATYPE_USERNAME=$SONATYPE_USERNAME" -e "SONATYPE_PASSWORD=$SONATYPE_PASSWORD"
+  qcifengineering/redbox-builder /bin/bash -c "cd build/src;mvn --settings /m2_repo/travis-settings.xml
+  -Dmaven.repo.local=/m2_repo -DskipTests=true deploy"
+env:
+  global:
+  - secure: pFQ0ojMXd3yl6vHCB/z7e6+hqpGX+qdgX+kiYCZrxP4BGO60cvodHkck9vZ6XhzuehJO/YnPsTi7wbC7SSJ0NloahBLNZEXH8Gg+4YOGk+zOqEqu9fgTNA1pFC1ztvW4MtJSzDrBxfvr/YUGe08fHdPC/nqjTeUY1t6TCDdbUaek8vcgkKSjocdhyhIlQ25wIqC9Y7T/eQn1aFqh7ylBQBkYvElNnr4lqlk4SrHs4VvW+SEAEpE3esNQqyYsIvrVkNkhiiOoTvNq0y6R/BOr4AXmK1ewCn9bj72qDGa6o+kwCS/r/+unVnIAxNOesZ3bybGbvaRCGiRZVn5MFasQ0oebTRHAY8A2FpQsZHuUW46c+RS3WyRWmHWeT8fkOOxpIEAIM/RIMDfJAqfoZsjsT8v+eQeGVw4Lu44sYZIqzI12s2hv6cO0KPgInL2vtdcHeNtExXE7hj4kxqHpcv79xYM2ev0hdpkQadcChrLfj/NbAfrnKmDD1EXweNb6P1xETV4iKGwD0vrnU1AUm7DVLRHG1m6SWmhXW5xufMByqNg/ovQaR2e7EIVdAndGtYwcbdXUdNBH43VxlhFgwRPHZBZ5OC+1kb0wCo7vxl9xnkY9xwear/x5eAtUXmaYaGNxxBy/kFqp1F0sdMnL/9G45HW2FJiBqEhNUt7uJFXmKow=
+  - secure: PFlYWnAogznEDxjVEA6U87K/VXVnaTg/Gnvy/89hksbTOM+HMYaptwYQm2mEi5o0CHFBG/V2PVhpWvspKeFTsk1It8V7oWYtXhzCS5A6r++YfmIYdSnoo7VpTutSjkRFQUV09ybWufdBdch/tdGX4Yj60HmSlHw9Gv+mYJvZzQ2V80YVCag9Uv5bhHV45GulOn/8mwsmg8aDqKg0ELSQHGiPoVAtjBpJoTR6ct37CjYIGFOEaqqbfhTxp4iW60So/lwDep60YPZa+yf7YzawO/kpiKUk/PUEzfD7mSZtc+BPCKRC32DyKEMNmVxsaA6EuDhLlM/Ub+VnbU3ZiessEYIenmPxVjatF1Aj4463WlngmpEouW8q9TsqgJA5QGonLNdKXHxoLMPCVJ3IA+CvLT2NP893AmZu0S1Te/+N4or1Iy0EK1phnRvAuoNFf/Vmbf2hOJ/uOE0EA45VNebvuZ7wiWwCSSjbuU5qz3K0QnL6S5LS3MTwmwSxftAFy3b0S7H9jZtqv2qoDnyD5jTzUvSUYACNr4chPhKgURP+JXSwDAKAjrFamlJPiwLIcs3l0fK0ifv8eZavbRP3CQmGhk710i9YEGm6XuE4tK3ALChGWKxFLYt+4letYSIN5srw3prP/KTgwcnIVWzM3ksaIjteAl6QQpLxf6b3QvX4K4o=
